@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+
+  </style>
+</head>
+<body>
+
+
+<div class="container-fluid">
+    <h3>Enter City Lat and Lon</h3>
+    <div style="width: 20%">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <label >Lat :</label>
+              <input type="text" class="form-control" name="lat" required>
+            </div>
+            <div class="form-group">
+              <label >Lon :</label>
+              <input type="text" class="form-control" name="lon" required>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+
+    </div>
+
+    {% if not message %}
+        <div class="card" style="width: 20%; background-color:bisque; padding: 10px; margin-top:10px">
+            <ul class="list-group list-group-flush">
+                <p>City Name :{{name}}</p>
+                <p>{{date}}</p>
+                <hr>
+                {% for weather in  weathers%}
+                    <p>Weather : {{weather.main}}</p>
+                    <p>Weather Description : {{weather.description}}</p>
+                    <p>Weather Icon : {{weather.icon}}</p>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+    <div class="card" style="width: 20%; background-color:bisque; padding: 10px; margin-top:10px">
+        <p>{{message}}</p>
+    </div>
+    {% endif %}
+
+    
+</div>
+
+</body>
+</html>
